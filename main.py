@@ -2,6 +2,11 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import os
 
+"""
+WEEK 1 
+
+------
+
 load_dotenv()
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -23,7 +28,7 @@ response = client.chat.completions.create(
 
 print(response.choices[0].message.content)
 
-
+"""
 
 
 
