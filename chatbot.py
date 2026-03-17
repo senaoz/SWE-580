@@ -45,8 +45,6 @@ import requests
 OLLAMA_URL = "http://localhost:11434"
 MODEL = "phi3:mini"
 
-
-
 SYSTEM_PROMPTS = [
     {
         "role": "system",

@@ -15,6 +15,7 @@ def get_current_time(timezone: str = "UTC") -> str:
         return "Error: Only UTC timezone is supported in this demo."
 
     now = datetime.datetime.now(datetime.timezone.utc)
+    print(f"\n[Tool] Getting current time: {now.strftime('%Y-%m-%d %H:%M:%S UTC')}\n")
     return now.strftime("%Y-%m-%d %H:%M:%S UTC")
 
 
