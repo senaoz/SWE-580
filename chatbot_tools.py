@@ -2,6 +2,7 @@ import json
 
 import requests
 
+from context_management import compact_history, estimate_tokens
 from tools import TOOL_FUNCTIONS, TOOL_SCHEMAS
 
 OLLAMA_URL = "http://localhost:11434"
@@ -18,13 +19,13 @@ SYSTEM_PROMPT = {
 }
 
 
-def chat(messages):
+def chat(messages, *, include_tools: bool = True):
     response = requests.post(
         f"{OLLAMA_URL}/api/chat",
         json={
             "model": MODEL,
             "messages": messages,
-            "tools": TOOL_SCHEMAS,
+            **({"tools": TOOL_SCHEMAS} if include_tools else {}),
             "stream": False,
         },
         timeout=60,
@@ -78,9 +79,19 @@ def main():
             break
 
         history.append({"role": "user", "content": user_input})
+        token_count = estimate_tokens(history)
+        print(f" [Tokens: ~{token_count}]")
+        history = compact_history(
+            history,
+            summarize_chat=lambda req: chat(req, include_tools=False),
+        )
 
         # Agentic loop: keep going until the model gives a text reply
         while True:
+            history = compact_history(
+                history,
+                summarize_chat=lambda req: chat(req, include_tools=False),
+            )
             reply = chat(history)
             history.append(reply)
 

@@ -45,6 +45,8 @@ import requests
 OLLAMA_URL = "http://localhost:11434"
 MODEL = "phi3:mini"
 
+from context_management import compact_history, estimate_tokens
+
 SYSTEM_PROMPTS = [
     {
         "role": "system",
@@ -67,6 +69,9 @@ SYSTEM_PROMPTS = [
         )
     }
 ]
+
+TOKEN_THRESHOLD = 500  # Compact when history exceeds this
+KEEP_RECENT = 4  # Always keep the last N user turns
 
 def chat(messages):
     response = requests.post(
@@ -107,9 +112,18 @@ def main():
 
         if user_input.strip().lower() in ("quit", "exit", "q"):
             print("\nConversation ended. Total messages: {}\n".format(len(history)))
+            print(f"Final token estimate: ~{estimate_tokens(history)}\n")
             break
 
         history.append({"role": "user", "content": user_input})
+        token_count = estimate_tokens(history)
+        print(f" [Tokens: ~{token_count}]")
+        history = compact_history(
+            history,
+            summarize_chat=chat,
+            token_threshold=TOKEN_THRESHOLD,
+            keep_recent_user_turns=KEEP_RECENT,
+        )
         reply = chat(history)
         history.append(reply)
 
