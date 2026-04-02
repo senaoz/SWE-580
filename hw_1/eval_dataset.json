@@ -1,0 +1,102 @@
+[
+  {
+    "id": "E01", "difficulty": "easy",
+    "question": "What is the Single Responsibility Principle?",
+    "expected": "A class should have only one reason to change, meaning it should have only one job or responsibility."
+  },
+  {
+    "id": "E02", "difficulty": "easy",
+    "question": "Define a design pattern and give one example.",
+    "expected": "A design pattern is a reusable solution to a commonly occurring problem. An example is the Singleton pattern, which ensures only one instance of a class exists."
+  },
+  {
+    "id": "E03", "difficulty": "easy",
+    "question": "What is the difference between a process and a thread?",
+    "expected": "A process is an independent program in execution with its own memory space, while a thread is a lighter-weight unit within a process that shares memory with other threads."
+  },
+  {
+    "id": "E04", "difficulty": "easy",
+    "question": "What does SOLID stand for in software engineering?",
+    "expected": "Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion."
+  },
+  {
+    "id": "E05", "difficulty": "easy",
+    "question": "What is version control and why is it used?",
+    "expected": "Version control tracks changes to source code over time, allows collaboration, and makes it possible to revert to previous versions."
+  },
+  {
+    "id": "E06", "difficulty": "easy",
+    "question": "What is a REST API?",
+    "expected": "A REST API is an architectural style for distributed systems that uses HTTP methods (GET, POST, PUT, DELETE) and stateless communication between client and server."
+  },
+  {
+    "id": "E07", "difficulty": "easy",
+    "question": "What is unit testing?",
+    "expected": "Unit testing is a software testing method where individual components or functions are tested in isolation to verify they work correctly."
+  },
+  {
+    "id": "E08", "difficulty": "easy",
+    "question": "What is the purpose of a UML class diagram?",
+    "expected": "A UML class diagram shows the static structure of a system by depicting classes, their attributes, methods, and relationships between them."
+  },
+  {
+    "id": "M01", "difficulty": "medium",
+    "question": "Explain the difference between coupling and cohesion, and why low coupling and high cohesion are desirable.",
+    "expected": "Coupling refers to interdependence between modules; cohesion refers to how closely related the responsibilities within a single module are. Low coupling reduces the impact of changes, while high cohesion makes modules easier to understand and maintain."
+  },
+  {
+    "id": "M02", "difficulty": "medium",
+    "question": "What is the Open/Closed Principle, and how does the Strategy pattern support it?",
+    "expected": "The Open/Closed Principle states software entities should be open for extension but closed for modification. The Strategy pattern supports this by encapsulating algorithms behind an interface, allowing new behaviors to be added without changing existing code."
+  },
+  {
+    "id": "M03", "difficulty": "medium",
+    "question": "Compare microservices architecture with a monolithic architecture. What are the trade-offs?",
+    "expected": "Monolithic architectures are simpler to develop and deploy but harder to scale and maintain. Microservices offer independent deployment and scalability but introduce complexity in communication, data management, and observability."
+  },
+  {
+    "id": "M04", "difficulty": "medium",
+    "question": "What is technical debt, and what are common strategies to manage it?",
+    "expected": "Technical debt is the implied cost of future rework caused by taking shortcuts. It is managed through refactoring, code reviews, enforcing coding standards, and allocating time for debt repayment in sprint planning."
+  },
+  {
+    "id": "M05", "difficulty": "medium",
+    "question": "Describe the Model-View-Controller (MVC) pattern and how responsibilities are divided.",
+    "expected": "MVC separates an application into three components: the Model handles data and business logic, the View renders the user interface, and the Controller mediates between Model and View by handling user input."
+  },
+  {
+    "id": "M06", "difficulty": "medium",
+    "question": "What is CI/CD and what problems does it solve?",
+    "expected": "Continuous Integration/Continuous Delivery automates building, testing, and deploying code. It reduces integration conflicts, catches bugs early, and enables faster, more reliable releases."
+  },
+  {
+    "id": "M07", "difficulty": "medium",
+    "question": "Explain the concept of dependency injection and its benefits.",
+    "expected": "Dependency injection is a technique where an object receives its dependencies from an external source rather than creating them itself. Benefits include improved testability, loose coupling, and easier configuration changes."
+  },
+  {
+    "id": "M08", "difficulty": "medium",
+    "question": "What is the difference between black-box and white-box testing?",
+    "expected": "Black-box testing evaluates software without knowledge of the internal code, focusing on inputs and outputs. White-box testing uses knowledge of internal logic to design test cases that cover specific code paths."
+  },
+  {
+    "id": "H01", "difficulty": "hard",
+    "question": "Analyze how the Liskov Substitution Principle, when violated, can lead to fragile hierarchies. Provide an example.",
+    "expected": "LSP requires that subtypes be substitutable for their base types without altering program correctness. A violation occurs when a Square extends Rectangle and overrides setWidth/setHeight to maintain equal sides, breaking code that assumes independent dimension changes. This creates a fragile hierarchy where polymorphism cannot be safely relied upon."
+  },
+  {
+    "id": "H02", "difficulty": "hard",
+    "question": "Compare event-driven architecture with request-response architectures in terms of scalability, complexity, and fault tolerance.",
+    "expected": "Event-driven architectures decouple producers and consumers via a message broker, enabling better scalability and fault isolation but introducing complexity around message ordering and eventual consistency. Request-response is simpler and easier to reason about but creates tight coupling and can cascade failures."
+  },
+  {
+    "id": "H03", "difficulty": "hard",
+    "question": "How do you design a system to be both testable and maintainable? Discuss at least three design principles or patterns that contribute to this.",
+    "expected": "Testable and maintainable systems rely on: (1) Dependency Injection to decouple components and allow mocking; (2) Single Responsibility Principle to keep classes focused and tests targeted; (3) Interface-based design (Dependency Inversion) to allow substitution of implementations; (4) CQRS or layered architecture to separate read and write concerns. Collectively these reduce side effects, improve isolation, and make behavior predictable."
+  },
+  {
+    "id": "H04", "difficulty": "hard",
+    "question": "What are the CAP theorem's implications for distributed system design? Give an example of how a real system makes this trade-off.",
+    "expected": "The CAP theorem states a distributed system can guarantee at most two of Consistency, Availability, and Partition Tolerance. During a network partition a system must choose: Apache Cassandra favors Availability and Partition Tolerance (AP), offering eventual consistency; HBase favors Consistency and Partition Tolerance (CP), sacrificing availability during partitions."
+  }
+]
