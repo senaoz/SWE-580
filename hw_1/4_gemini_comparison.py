@@ -1,8 +1,3 @@
-"""
-gemini_comparison.py  ·  Bonus — Swap Ollama → Google Gemini
-Runs the same evaluation and compares correctness, latency, and cost.
-"""
-
 import os
 import time
 import json
@@ -21,10 +16,6 @@ from langsmith_evaluation import (
 from langsmith.evaluation import evaluate
 
 os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY", "YOUR_GEMINI_KEY")
-
-# ──────────────────────────────────────────────
-# Gemini RAG Chain
-# ──────────────────────────────────────────────
 
 PROMPT_TEMPLATE = """You are a software-engineering teaching assistant.
 Use ONLY the context below to answer concisely and accurately.
@@ -76,10 +67,6 @@ def make_gemini_runnable(cfg: RAGConfig):
     return predict
 
 
-# ──────────────────────────────────────────────
-# Latency Benchmark
-# ──────────────────────────────────────────────
-
 def benchmark_latency(predict_fn, questions: list[str], label: str) -> dict:
     latencies = []
     for q in questions:
@@ -96,11 +83,6 @@ def benchmark_latency(predict_fn, questions: list[str], label: str) -> dict:
     return stats
 
 
-# ──────────────────────────────────────────────
-# Cost Estimation (Gemini 1.5 Flash pricing)
-# ──────────────────────────────────────────────
-
-# As of early 2025: $0.075 / 1M input tokens, $0.30 / 1M output tokens (free tier: 1M/day)
 INPUT_PRICE_PER_TOKEN  = 0.075 / 1_000_000
 OUTPUT_PRICE_PER_TOKEN = 0.300 / 1_000_000
 AVG_INPUT_TOKENS       = 800   # estimated per query (context + question)
@@ -114,12 +96,7 @@ def estimate_cost(n_queries: int) -> float:
     return round(cost, 6)
 
 
-# ──────────────────────────────────────────────
-# Run Comparison
-# ──────────────────────────────────────────────
-
 def run_comparison():
-    # Use the optimal config from Part 3 (update as needed after experiments)
     best_cfg = RAGConfig(
         chunk_size=1000,
         chunk_overlap=200,
@@ -144,7 +121,6 @@ def run_comparison():
         metadata={"model": "gemini-1.5-flash", **best_cfg.to_dict()},
     )
 
-    # Parse scores
     scores = {"correctness": [], "relevance": [], "faithfulness": [], "conciseness": []}
     for r in gemini_results._results:
         for fb in r.get("evaluation_results", {}).get("results", []):
@@ -153,7 +129,6 @@ def run_comparison():
     print("\n── COMPARISON SUMMARY ───────────────────────────────────")
     print(f"{'Metric':<22} {'Ollama (llama3.2:3b)':>18} {'Gemini 1.5 Flash':>18}")
     print("─" * 60)
-    # Hardcode baseline from Part 2 run for comparison display
     baseline = {"correctness": 0.62, "relevance": 0.71,
                 "faithfulness": 0.68, "conciseness": 0.74}
     for m in ["correctness", "relevance", "faithfulness", "conciseness"]:
@@ -162,20 +137,6 @@ def run_comparison():
         print(f"  {m:<20} {oll:>18.3f} {gem:>18.3f}")
 
     n = 20  # dataset size
-    print(f"\n  Estimated Gemini cost for {n} queries: ${estimate_cost(n):.5f}")
-    print(f"  Ollama cost: $0.00000 (runs locally)")
-    print("""
-  ── RECOMMENDATION ──────────────────────────────────────
-  • Gemini 1.5 Flash delivers higher correctness (~+8–12%)
-    due to larger training corpus and better reasoning.
-  • Latency is comparable for non-streaming (2–4 s) but
-    Ollama can be faster on a GPU workstation with no RTT.
-  • For a student project on free-tier: Gemini is the
-    better choice for accuracy; Ollama if data privacy
-    or offline operation is required.
-  ────────────────────────────────────────────────────────
-""")
-
 
 if __name__ == "__main__":
     run_comparison()

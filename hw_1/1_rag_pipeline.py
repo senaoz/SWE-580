@@ -1,7 +1,3 @@
-"""
-rag_pipeline.py  ·  Part 1 — Core RAG System
-Stack: LangChain · Ollama (llama3.2:3b) · ChromaDB
-"""
 
 import os
 import json
@@ -18,10 +14,6 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 
 
-# ──────────────────────────────────────────────
-# 1.  Configuration
-# ──────────────────────────────────────────────
-
 @dataclass
 class RAGConfig:
     """All tuneable knobs live here — change once, propagates everywhere."""
@@ -29,7 +21,7 @@ class RAGConfig:
     chunk_size: int = 1000
     chunk_overlap: int = 200
     # retrieval
-    k: int = 4                          # number of docs retrieved
+    k: int = 5
     # models
     llm_model: str = "llama3.2:3b"
     embed_model: str = "llama3.2:3b"
@@ -43,10 +35,6 @@ class RAGConfig:
     def to_dict(self) -> dict:
         return asdict(self)
 
-
-# ──────────────────────────────────────────────
-# 2.  Document Ingestion
-# ──────────────────────────────────────────────
 
 def load_and_split(cfg: RAGConfig) -> list:
     """Load every PDF in cfg.pdf_dir and split into chunks."""
@@ -74,10 +62,6 @@ def load_and_split(cfg: RAGConfig) -> list:
     return all_chunks
 
 
-# ──────────────────────────────────────────────
-# 3.  Vector Store
-# ──────────────────────────────────────────────
-
 def build_vectorstore(chunks: list, cfg: RAGConfig) -> Chroma:
     """Embed chunks and persist to Chroma."""
     embeddings = OllamaEmbeddings(model=cfg.embed_model)
@@ -100,10 +84,6 @@ def load_vectorstore(cfg: RAGConfig) -> Chroma:
         persist_directory=cfg.chroma_dir,
     )
 
-
-# ──────────────────────────────────────────────
-# 4.  RAG Chain
-# ──────────────────────────────────────────────
 
 PROMPT_TEMPLATE = """You are a software-engineering teaching assistant.
 Use ONLY the context below to answer the question concisely and accurately.
@@ -138,10 +118,6 @@ def build_rag_chain(vectorstore: Chroma, cfg: RAGConfig):
     return chain, retriever
 
 
-# ──────────────────────────────────────────────
-# 5.  Manual Testing Helper
-# ──────────────────────────────────────────────
-
 def run_manual_tests(chain, retriever, qa_pairs: list[dict], n: int = 5) -> list[dict]:
     """
     qa_pairs: list of {"question": ..., "expected": ..., "difficulty": ...}
@@ -161,10 +137,6 @@ def run_manual_tests(chain, retriever, qa_pairs: list[dict], n: int = 5) -> list
     return results
 
 
-# ──────────────────────────────────────────────
-# 6.  Entry Point
-# ──────────────────────────────────────────────
-
 if __name__ == "__main__":
     cfg = RAGConfig(
         chunk_size=1000,
@@ -173,20 +145,16 @@ if __name__ == "__main__":
         experiment_name="baseline",
     )
 
-    # ── Build ──
     chunks = load_and_split(cfg)
     vs     = build_vectorstore(chunks, cfg)
 
     chain, retriever = build_rag_chain(vs, cfg)
 
-    # Load evaluation dataset
     with open("./hw_1/eval_dataset.json") as f:
         qa_pairs = json.load(f)
 
-    # Manually test the first 5 questions
     results = run_manual_tests(chain, retriever, qa_pairs, n=5)
 
-    # Persist manual-test results
     with open("./hw_1/manual_test_results.json", "w") as f:
         json.dump(results, f, indent=2)
     print("\n✔ Results saved to manual_test_results.json")

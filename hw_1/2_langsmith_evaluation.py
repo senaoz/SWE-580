@@ -1,10 +1,3 @@
-"""
-langsmith_evaluation.py  ·  Part 2 — LangSmith Integration
-Evaluators: Correctness · Relevance · Hallucination Detection
-https://smith.langchain.com/o/75161731-1558-47f2-a9da-aa9ca13488fa/datasets/6db2b178-2c90-493b-8ac2-62fc2742107c/compare?selectedSessions=5a79a612-c7f9-4fd0-b419-2cab794a6547%2Cb036ee7f-eb67-4e5d-978e-f1bf3b2ba6a5&source=5a79a612-c7f9-4fd0-b419-2cab794a6547
-https://smith.langchain.com/o/75161731-1558-47f2-a9da-aa9ca13488fa/datasets/6db2b178-2c90-493b-8ac2-62fc2742107c/compare?selectedSessions=5a79a612-c7f9-4fd0-b419-2cab794a6547
-"""
-
 import os
 import json
 from dotenv import load_dotenv
@@ -15,17 +8,12 @@ from langchain_ollama import OllamaLLM
 
 from rag_pipeline import RAGConfig, load_vectorstore, build_rag_chain
 
-# ── LangSmith credentials (set in .env or shell) ──
-os.environ["LANGCHAIN_TRACING_V2"]  = "true"
-os.environ["LANGCHAIN_ENDPOINT"]    = "https://api.smith.langchain.com"
-os.environ["LANGCHAIN_API_KEY"]     = os.getenv("LANGSMITH_API_KEY", "YOUR_KEY")
-os.environ["LANGCHAIN_PROJECT"]     = "App"
+os.environ["LANGCHAIN_TRACING_V2"]  = os.getenv("LANGSMITH_TRACING")
+os.environ["LANGCHAIN_ENDPOINT"]    = os.getenv("LANGSMITH_ENDPOINT")
+os.environ["LANGCHAIN_API_KEY"]     = os.getenv("LANGSMITH_API_KEY")
+os.environ["LANGCHAIN_PROJECT"]     = os.getenv("LANGSMITH_PROJECT")
 
 client = Client()
-
-# ──────────────────────────────────────────────
-# 1.  Upload Dataset to LangSmith
-# ──────────────────────────────────────────────
 
 DATASET_NAME = "RAG-HW1-Eval-v1"
 
@@ -53,11 +41,6 @@ def upload_dataset(path: str = "./hw_1/eval_dataset.json") -> str:
     print(f"✔ Uploaded {len(qa_pairs)} examples to '{DATASET_NAME}'")
     return DATASET_NAME
 
-
-# ──────────────────────────────────────────────
-# 2.  RAG Runnable (wrapped for LangSmith)
-# ──────────────────────────────────────────────
-
 def make_rag_runnable(cfg: RAGConfig):
     """Returns a callable (input_dict → output_dict) compatible with evaluate()."""
     vs = load_vectorstore(cfg)
@@ -73,10 +56,6 @@ def make_rag_runnable(cfg: RAGConfig):
     return predict
 
 
-# ──────────────────────────────────────────────
-# 3.  Custom Evaluators
-# ──────────────────────────────────────────────
-
 judge_llm = OllamaLLM(model="llama3.2:3b", temperature=0)
 
 
@@ -89,7 +68,6 @@ def _llm_score(prompt_text: str, score_key: str):
                 return float(line.split(":")[-1].strip().split()[0])
             except ValueError:
                 pass
-    # fallback: try raw numeric
     try:
         return float(result.split()[0])
     except (ValueError, IndexError):
@@ -164,7 +142,7 @@ def hallucination_evaluator(run, example) -> dict:
     return {"key": "faithfulness", "score": score}
 
 
-# ── Evaluator 4 (bonus): Conciseness ─────────
+# ── Evaluator 4: Conciseness ─────────
 
 CONCISENESS_PROMPT = """\
 Question: {question}
@@ -186,10 +164,6 @@ def conciseness_evaluator(run, example) -> dict:
     return {"key": "conciseness", "score": score}
 
 
-# ──────────────────────────────────────────────
-# 4.  Run Baseline Evaluation
-# ──────────────────────────────────────────────
-
 def run_evaluation(cfg: RAGConfig, experiment_prefix: str = "baseline"):
     dataset_name = upload_dataset()
     predict      = make_rag_runnable(cfg)
@@ -208,7 +182,6 @@ def run_evaluation(cfg: RAGConfig, experiment_prefix: str = "baseline"):
         num_repetitions=1,
     )
 
-    # ── Print summary ──
     print(f"\n{'─'*55}")
     print(f"Experiment : {experiment_prefix}")
     scores = {"correctness": [], "relevance": [], "faithfulness": [], "conciseness": []}

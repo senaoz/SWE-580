@@ -1,8 +1,3 @@
-"""
-experiments.py  ·  Part 3 — Grid-search over chunk_size × overlap × k
-Runs 10+ experiments, each tracked separately in LangSmith.
-"""
-
 import json
 import itertools
 from pathlib import Path
@@ -12,10 +7,6 @@ import pandas as pd
 
 from rag_pipeline import RAGConfig, load_and_split, build_vectorstore
 from langsmith_evaluation import run_evaluation
-
-# ──────────────────────────────────────────────
-# Experiment Grid
-# ──────────────────────────────────────────────
 
 CHUNK_SIZES  = [500, 1000, 1500]
 OVERLAPS     = [50, 200]
@@ -42,10 +33,6 @@ def build_experiment_configs() -> List[RAGConfig]:
     return configs
 
 
-# ──────────────────────────────────────────────
-# Run All Experiments
-# ──────────────────────────────────────────────
-
 def run_all_experiments():
     configs = build_experiment_configs()
     summary_rows = []
@@ -55,14 +42,11 @@ def run_all_experiments():
         print(f"EXPERIMENT: {cfg.experiment_name}")
         print(f"  chunk_size={cfg.chunk_size}  overlap={cfg.chunk_overlap}  k={cfg.k}")
 
-        # Build a fresh vector store for each configuration
         chunks = load_and_split(cfg)
         build_vectorstore(chunks, cfg)
 
-        # Evaluate via LangSmith
         results = run_evaluation(cfg, experiment_prefix=cfg.experiment_name)
 
-        # Aggregate scores
         scores = {"correctness": [], "relevance": [],
                   "faithfulness": [], "conciseness": []}
         for r in results._results:
@@ -85,7 +69,6 @@ def run_all_experiments():
         summary_rows.append(row)
         print(f"  composite score: {row['avg_composite']:.4f}")
 
-    # ── Results Table ──
     df = pd.DataFrame(summary_rows)
     df = df.sort_values("avg_composite", ascending=False)
     print("\n" + "="*70)
@@ -96,7 +79,6 @@ def run_all_experiments():
     df.to_csv("experiment_results.csv", index=False)
     print("\n✔ Saved → experiment_results.csv")
 
-    # ── Optimal Config ──
     best = df.iloc[0]
     print(f"\n🏆 OPTIMAL CONFIG: {best['experiment']}")
     print(f"   chunk_size={int(best['chunk_size'])}  "
@@ -110,10 +92,6 @@ def run_all_experiments():
 
     return df
 
-
-# ──────────────────────────────────────────────
-# Failure-Case Analysis (Part 2 deliverable)
-# ──────────────────────────────────────────────
 
 def analyze_failures(results_file: str = "./hw_1/manual_test_results.json"):
     """Print structured failure analysis for the report."""
@@ -129,7 +107,6 @@ def analyze_failures(results_file: str = "./hw_1/manual_test_results.json"):
 
     for r in results:
         q, exp, act = r["question"], r["expected"], r.get("actual", "")
-        # Heuristic classification (replace with LLM judge in production)
         if not act.strip() or "I don't know" in act:
             failure_categories["off_topic_retrieval"].append(r)
         elif len(act.split()) < len(exp.split()) * 0.4:
