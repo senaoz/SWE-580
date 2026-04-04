@@ -7,12 +7,12 @@ from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
 from rag_pipeline import RAGConfig, load_vectorstore
-from langchain_community.vectorstores import Chroma
-from langchain_community.embeddings import OllamaEmbeddings
 from langsmith_evaluation import (
     upload_dataset, correctness_evaluator, relevance_evaluator,
-    hallucination_evaluator, conciseness_evaluator
+    hallucination_evaluator, conciseness_evaluator,
 )
+from langchain_community.vectorstores import Chroma
+from langchain_community.embeddings import OllamaEmbeddings
 from langsmith.evaluation import evaluate
 
 os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY", "YOUR_GEMINI_KEY")

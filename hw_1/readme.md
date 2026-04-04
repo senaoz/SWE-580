@@ -11,10 +11,10 @@ Covers Part 1 (Core RAG), Part 2 (LangSmith Evaluation), Part 3 (Experiments), a
 ```
 hw_1/
 ├── pdfs/                          # 5 software testing PDFs (not tracked in git)
-├── 1_rag_pipeline.py              # Part 1 – ingestion, chunking, RAG chain
-├── 2_langsmith_evaluation.py      # Part 2 – LangSmith tracing + 4 custom evaluators
-├── 3_experiments.py               # Part 3 – 10 config experiments + analysis
-├── 4_gemini_comparison.py         # Gemini vs Ollama comparison
+├── rag_pipeline.py              # Part 1 – ingestion, chunking, RAG chain
+├── langsmith_evaluation.py      # Part 2 – LangSmith tracing + 4 custom evaluators
+├── experiments.py               # Part 3 – 10 config experiments + analysis
+├── gemini_comparison.py         # Gemini vs Ollama comparison
 ├── eval_dataset.json              # 20 Q&A pairs (8 easy / 8 medium / 4 hard)
 ├── manual_test_results.json       # auto-generated after Part 1
 ├── experiment_results.csv         # auto-generated after Part 3
@@ -73,25 +73,25 @@ Run scripts in order from the repo root (`SWE-580/`):
 
 ### Part 1 — Build & Manual Test
 ```bash
-python hw_1/1_rag_pipeline.py
+python hw_1/rag_pipeline.py
 ```
 Builds ChromaDB from PDFs, runs 5 manual Q&A tests, saves `manual_test_results.json`.
 
 ### Part 2 — LangSmith Evaluation
 ```bash
-python hw_1/2_langsmith_evaluation.py
+python hw_1/langsmith_evaluation.py
 ```
 Uploads the 20-question dataset to LangSmith, runs evaluation with 4 custom evaluators (Correctness, Relevance, Faithfulness, Conciseness), and prints per-metric averages.
 
 ### Part 3 — Experiments
 ```bash
-python hw_1/3_experiments.py
+python hw_1/experiments.py
 ```
 Runs 10 experiments over a grid of chunk sizes, overlaps, and k values. Saves `experiment_results.csv` and prints the optimal configuration.
 
 ### Gemini Comparison
 ```bash
-python hw_1/4_gemini_comparison.py
+python hw_1/gemini_comparison.py
 ```
 Requires `GOOGLE_API_KEY`. Compares Gemini and Ollama responses on the same questions.
 

@@ -18,15 +18,20 @@ client = Client()
 DATASET_NAME = "RAG-HW1-Eval-v1"
 
 def upload_dataset(path: str = "./hw_1/eval_dataset.json") -> str:
-    """Create (or fetch existing) LangSmith dataset from local JSON."""
+    """Create (or re-create if empty) LangSmith dataset from local JSON."""
     with open(path) as f:
         qa_pairs = json.load(f)
 
-    # Avoid duplicates
-    existing = [d.name for d in client.list_datasets()]
+    existing = {d.name: d for d in client.list_datasets()}
     if DATASET_NAME in existing:
-        print(f"Dataset '{DATASET_NAME}' already exists — skipping upload.")
-        return DATASET_NAME
+        dataset = existing[DATASET_NAME]
+        example_count = sum(1 for _ in client.list_examples(dataset_id=dataset.id))
+        if example_count == len(qa_pairs):
+            print(f"Dataset '{DATASET_NAME}' already has {example_count} examples — skipping upload.")
+            return DATASET_NAME
+        # Dataset exists but is empty or stale — delete and recreate
+        print(f"Dataset '{DATASET_NAME}' has {example_count} examples (expected {len(qa_pairs)}) — recreating.")
+        client.delete_dataset(dataset_id=dataset.id)
 
     dataset = client.create_dataset(
         dataset_name=DATASET_NAME,
