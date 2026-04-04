@@ -1,102 +1,102 @@
 [
   {
     "id": "E01", "difficulty": "easy",
-    "question": "What is the Single Responsibility Principle?",
-    "expected": "A class should have only one reason to change, meaning it should have only one job or responsibility."
+    "question": "What are the main steps in the Test-Driven Development (TDD) cycle?",
+    "expected": "The TDD cycle involves: 1) Writing a failing test for a new feature, 2) Running the test to confirm it fails, 3) Implementing the minimal code to make the test pass, and 4) Refactoring the code for readability and maintainability."
   },
   {
     "id": "E02", "difficulty": "easy",
-    "question": "Define a design pattern and give one example.",
-    "expected": "A design pattern is a reusable solution to a commonly occurring problem. An example is the Singleton pattern, which ensures only one instance of a class exists."
+    "question": "Define 'Unit Testing' and its primary purpose.",
+    "expected": "Unit testing is the practice where developers write test cases for the smallest components of software, such as methods or classes, to ensure they work correctly in isolation."
   },
   {
     "id": "E03", "difficulty": "easy",
-    "question": "What is the difference between a process and a thread?",
-    "expected": "A process is an independent program in execution with its own memory space, while a thread is a lighter-weight unit within a process that shares memory with other threads."
+    "question": "What is the difference between Verification and Validation in software testing?",
+    "expected": "Validation means building the right system (meeting user expectations), while Verification means building the system right (matching implementation to specifications). Boehm summarizes this as 'Are we building the right product?' vs 'Are we building the product right?'"
   },
   {
     "id": "E04", "difficulty": "easy",
-    "question": "What does SOLID stand for in software engineering?",
-    "expected": "Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion."
+    "question": "What is the primary goal of Mutation Testing?",
+    "expected": "Mutation testing aims to evaluate the quality or adequacy of a test suite by introducing small structural changes (mutants) to the code to see if the existing tests can detect them."
   },
   {
     "id": "E05", "difficulty": "easy",
-    "question": "What is version control and why is it used?",
-    "expected": "Version control tracks changes to source code over time, allows collaboration, and makes it possible to revert to previous versions."
+    "question": "How many professional developers participated in the survey on developer attitudes toward testing, and how many questions did it include?",
+    "expected": "The survey received 284 responses from professional software developers and consisted of 21 questions aimed at assessing their current engagement with testing and identifying factors influencing their inclination toward testing."
   },
   {
     "id": "E06", "difficulty": "easy",
-    "question": "What is a REST API?",
-    "expected": "A REST API is an architectural style for distributed systems that uses HTTP methods (GET, POST, PUT, DELETE) and stateless communication between client and server."
+    "question": "How many developers participated in the unit testing survey, and across how many countries was it conducted?",
+    "expected": "The unit testing survey was conducted amongst 225 software developers across 29 countries using a global online marketing research platform."
   },
   {
     "id": "E07", "difficulty": "easy",
-    "question": "What is unit testing?",
-    "expected": "Unit testing is a software testing method where individual components or functions are tested in isolation to verify they work correctly."
+    "question": "What is Integration Testing and when does it occur in the development process?",
+    "expected": "Integration Testing verifies that separately developed components or modules work correctly together when combined. It occurs after unit testing and before system testing, focusing on the interfaces and interactions between integrated units."
   },
   {
     "id": "E08", "difficulty": "easy",
-    "question": "What is the purpose of a UML class diagram?",
-    "expected": "A UML class diagram shows the static structure of a system by depicting classes, their attributes, methods, and relationships between them."
+    "question": "What is the main characteristic that makes web applications different from traditional software from a testing perspective?",
+    "expected": "Web applications are distributed, multi-tier systems that combine server-side logic, client-side scripting, and dynamic content. This makes them harder to test due to their stateful navigation flows, browser dependency, asynchronous behavior, and constantly evolving frameworks and environments."
   },
   {
     "id": "M01", "difficulty": "medium",
-    "question": "Explain the difference between coupling and cohesion, and why low coupling and high cohesion are desirable.",
-    "expected": "Coupling refers to interdependence between modules; cohesion refers to how closely related the responsibilities within a single module are. Low coupling reduces the impact of changes, while high cohesion makes modules easier to understand and maintain."
+    "question": "Explain the concept of a 'Killed Mutant' in mutation testing.",
+    "expected": "A mutant is considered 'killed' or detected when at least one test case produces a different result on the mutated code compared to the original code. If no test detects the change, the mutant 'survives', indicating a weakness in the test suite."
   },
   {
     "id": "M02", "difficulty": "medium",
-    "question": "What is the Open/Closed Principle, and how does the Strategy pattern support it?",
-    "expected": "The Open/Closed Principle states software entities should be open for extension but closed for modification. The Strategy pattern supports this by encapsulating algorithms behind an interface, allowing new behaviors to be added without changing existing code."
+    "question": "What are the three main problems associated with Web Application testing identified in research?",
+    "expected": "The three main problems are: 1) Fragility (test cases breaking due to locator or UI changes), 2) Strong Coupling/Low Cohesion (tests being too tightly bound to implementation details), and 3) Incompleteness (difficulty in testing all possible paths, states, and inputs)."
   },
   {
     "id": "M03", "difficulty": "medium",
-    "question": "Compare microservices architecture with a monolithic architecture. What are the trade-offs?",
-    "expected": "Monolithic architectures are simpler to develop and deploy but harder to scale and maintain. Microservices offer independent deployment and scalability but introduce complexity in communication, data management, and observability."
+    "question": "Describe 'Scaffolding' in software testing and name its three components.",
+    "expected": "Scaffolding is a structure that substitutes missing parts of a system to enable isolated testing of a component. It includes: 1) Drivers (set up the execution environment and call the component under test), 2) Stubs (simulate missing or dependent components), and 3) Oracles (evaluate whether the output is correct)."
   },
   {
     "id": "M04", "difficulty": "medium",
-    "question": "What is technical debt, and what are common strategies to manage it?",
-    "expected": "Technical debt is the implied cost of future rework caused by taking shortcuts. It is managed through refactoring, code reviews, enforcing coding standards, and allocating time for debt repayment in sprint planning."
+    "question": "How does 'Confirmation Bias' affect developers during unit testing?",
+    "expected": "Confirmation bias leads developers to design tests that confirm the software works as they expect rather than trying to find failures. This results in weaker test suites because developers seek evidence to verify their implementation instead of actively trying to falsify it."
   },
   {
     "id": "M05", "difficulty": "medium",
-    "question": "Describe the Model-View-Controller (MVC) pattern and how responsibilities are divided.",
-    "expected": "MVC separates an application into three components: the Model handles data and business logic, the View renders the user interface, and the Controller mediates between Model and View by handling user input."
+    "question": "According to the survey on developer attitudes, what are the main reasons that positively motivate developers to write more tests?",
+    "expected": "Positive motivations include the pursuit of software quality, personal satisfaction from writing good tests, and a sense of professional pride. Developers who are motivated tend to view testing as a craft rather than a chore."
   },
   {
     "id": "M06", "difficulty": "medium",
-    "question": "What is CI/CD and what problems does it solve?",
-    "expected": "Continuous Integration/Continuous Delivery automates building, testing, and deploying code. It reduces integration conflicts, catches bugs early, and enables faster, more reliable releases."
+    "question": "According to the survey on developer attitudes, what factors negatively impact developers' motivation to test, and what solution emerged from responses?",
+    "expected": "Negative factors include perceiving testing as mundane, tendency to prioritize other tasks, and lack of recognition. The survey found that providing better recognition for developers' testing efforts is a key approach to mitigate these negative factors."
   },
   {
     "id": "M07", "difficulty": "medium",
-    "question": "Explain the concept of dependency injection and its benefits.",
-    "expected": "Dependency injection is a technique where an object receives its dependencies from an external source rather than creating them itself. Benefits include improved testability, loose coupling, and easier configuration changes."
+    "question": "What were the key quantitative results of the TDD+M experiment compared to standard TDD?",
+    "expected": "In the cross-experiment, TDD+M tests achieved 53.3% statement coverage on TDD code versus 33.5% for TDD tests on their own code, and 64.9% mutation coverage versus 37.5%. TDD+M tests also found more post-release defects in TDD code than TDD tests found in TDD+M code."
   },
   {
     "id": "M08", "difficulty": "medium",
-    "question": "What is the difference between black-box and white-box testing?",
-    "expected": "Black-box testing evaluates software without knowledge of the internal code, focusing on inputs and outputs. White-box testing uses knowledge of internal logic to design test cases that cover specific code paths."
+    "question": "What is the difference between Functional Testing and Model-Based Testing?",
+    "expected": "Functional testing validates the system against its specified requirements by treating it as a black box — inputs and outputs are tested without knowledge of internal structure. Model-based testing derives test cases from a formal model (e.g., finite state machines) of the system's expected behavior, enabling more systematic and automated test generation."
   },
   {
     "id": "H01", "difficulty": "hard",
-    "question": "Analyze how the Liskov Substitution Principle, when violated, can lead to fragile hierarchies. Provide an example.",
-    "expected": "LSP requires that subtypes be substitutable for their base types without altering program correctness. A violation occurs when a Square extends Rectangle and overrides setWidth/setHeight to maintain equal sides, breaking code that assumes independent dimension changes. This creates a fragile hierarchy where polymorphism cannot be safely relied upon."
+    "question": "Explain the TDD+M hybrid approach and its theoretical advantage over standard TDD.",
+    "expected": "TDD+M inserts a mutation testing step between the passing tests and the refactoring phase of TDD. It objectively verifies test quality by requiring tests to 'kill' mutants before moving on. This reduces confirmation bias more effectively than standard TDD by forcing developers to write stronger, more rigorous tests rather than relying on their own assumptions."
   },
   {
     "id": "H02", "difficulty": "hard",
-    "question": "Compare event-driven architecture with request-response architectures in terms of scalability, complexity, and fault tolerance.",
-    "expected": "Event-driven architectures decouple producers and consumers via a message broker, enabling better scalability and fault isolation but introducing complexity around message ordering and eventual consistency. Request-response is simpler and easier to reason about but creates tight coupling and can cascade failures."
+    "question": "Analyze why identifying 'Equivalent Mutants' is a significant challenge in mutation testing.",
+    "expected": "Equivalent mutants are syntactically different from the original code but semantically identical — no test can ever kill them because they produce the same behavior. Identifying them is an undecidable problem in computer science, meaning there is no general algorithm to determine equivalence. This often requires manual human analysis, making mutation testing expensive at scale."
   },
   {
     "id": "H03", "difficulty": "hard",
-    "question": "How do you design a system to be both testable and maintainable? Discuss at least three design principles or patterns that contribute to this.",
-    "expected": "Testable and maintainable systems rely on: (1) Dependency Injection to decouple components and allow mocking; (2) Single Responsibility Principle to keep classes focused and tests targeted; (3) Interface-based design (Dependency Inversion) to allow substitution of implementations; (4) CQRS or layered architecture to separate read and write concerns. Collectively these reduce side effects, improve isolation, and make behavior predictable."
+    "question": "Compare the DOM model and the Navigation model as used in web application testing research.",
+    "expected": "The DOM model represents the structural elements of a web page and is commonly used for JavaScript unit testing and UI element locating. The Navigation model (such as Finite-State Machines) represents the application's flow — pages as states and user interactions as transitions — enabling broader path coverage and more systematic exploration of user journeys."
   },
   {
     "id": "H04", "difficulty": "hard",
-    "question": "What are the CAP theorem's implications for distributed system design? Give an example of how a real system makes this trade-off.",
-    "expected": "The CAP theorem states a distributed system can guarantee at most two of Consistency, Availability, and Partition Tolerance. During a network partition a system must choose: Apache Cassandra favors Availability and Partition Tolerance (AP), offering eventual consistency; HBase favors Consistency and Partition Tolerance (CP), sacrificing availability during partitions."
+    "question": "How does the survey on developer attitudes toward testing challenge the prevailing belief that 'developers simply do not like writing tests'?",
+    "expected": "The survey reveals a more nuanced picture: developers are not intrinsically opposed to testing, but are inhibited by environmental factors like lack of recognition and perception of testing as mundane. Many would actually test more if conditions improved. This challenges the assumption that low testing engagement is a preference, suggesting it is instead a structural and motivational problem that can be addressed through better tooling, culture, and recognition."
   }
 ]

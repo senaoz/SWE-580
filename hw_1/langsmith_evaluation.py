@@ -1,15 +1,17 @@
 """
 langsmith_evaluation.py  ·  Part 2 — LangSmith Integration
 Evaluators: Correctness · Relevance · Hallucination Detection
+https://smith.langchain.com/o/75161731-1558-47f2-a9da-aa9ca13488fa/datasets/6db2b178-2c90-493b-8ac2-62fc2742107c/compare?selectedSessions=5a79a612-c7f9-4fd0-b419-2cab794a6547%2Cb036ee7f-eb67-4e5d-978e-f1bf3b2ba6a5&source=5a79a612-c7f9-4fd0-b419-2cab794a6547
+https://smith.langchain.com/o/75161731-1558-47f2-a9da-aa9ca13488fa/datasets/6db2b178-2c90-493b-8ac2-62fc2742107c/compare?selectedSessions=5a79a612-c7f9-4fd0-b419-2cab794a6547
 """
 
 import os
 import json
+from dotenv import load_dotenv
+load_dotenv()
 from langsmith import Client
-from langsmith.evaluation import evaluate, LangChainStringEvaluator
-from langchain_community.llms import Ollama
-from langchain.prompts import PromptTemplate
-from langchain_core.output_parsers import StrOutputParser
+from langsmith.evaluation import evaluate
+from langchain_ollama import OllamaLLM
 
 from rag_pipeline import RAGConfig, load_vectorstore, build_rag_chain
 
@@ -17,7 +19,7 @@ from rag_pipeline import RAGConfig, load_vectorstore, build_rag_chain
 os.environ["LANGCHAIN_TRACING_V2"]  = "true"
 os.environ["LANGCHAIN_ENDPOINT"]    = "https://api.smith.langchain.com"
 os.environ["LANGCHAIN_API_KEY"]     = os.getenv("LANGSMITH_API_KEY", "YOUR_KEY")
-os.environ["LANGCHAIN_PROJECT"]     = "rag-se-course"
+os.environ["LANGCHAIN_PROJECT"]     = "App"
 
 client = Client()
 
@@ -25,9 +27,9 @@ client = Client()
 # 1.  Upload Dataset to LangSmith
 # ──────────────────────────────────────────────
 
-DATASET_NAME = "SE-Course-RAG-Eval-v1"
+DATASET_NAME = "RAG-HW1-Eval-v1"
 
-def upload_dataset(path: str = "eval_dataset.json") -> str:
+def upload_dataset(path: str = "./hw_1/eval_dataset.json") -> str:
     """Create (or fetch existing) LangSmith dataset from local JSON."""
     with open(path) as f:
         qa_pairs = json.load(f)
@@ -64,7 +66,7 @@ def make_rag_runnable(cfg: RAGConfig):
     def predict(inputs: dict) -> dict:
         question = inputs["question"]
         answer   = chain.invoke(question)
-        sources  = retriever.get_relevant_documents(question)
+        sources  = retriever.invoke(question)
         context  = "\n\n".join(d.page_content for d in sources)
         return {"answer": answer, "context": context, "question": question}
 
@@ -75,7 +77,7 @@ def make_rag_runnable(cfg: RAGConfig):
 # 3.  Custom Evaluators
 # ──────────────────────────────────────────────
 
-judge_llm = Ollama(model="llama3.2:3b", temperature=0)
+judge_llm = OllamaLLM(model="llama3.2:3b", temperature=0)
 
 
 def _llm_score(prompt_text: str, score_key: str):

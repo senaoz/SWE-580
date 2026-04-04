@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(ollama list:*)",
-      "Bash(pip install:*)"
+      "Bash(pip install:*)",
+      "Bash(curl -s http://localhost:11434/api/tags)",
+      "Bash(.venv/bin/pip install:*)"
     ]
   }
 }

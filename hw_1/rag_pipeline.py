@@ -11,9 +11,8 @@ from typing import Optional
 
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.embeddings import OllamaEmbeddings
-from langchain_community.vectorstores import Chroma
-from langchain_community.llms import Ollama
+from langchain_ollama import OllamaEmbeddings, OllamaLLM
+from langchain_chroma import Chroma
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
@@ -35,8 +34,8 @@ class RAGConfig:
     llm_model: str = "llama3.2:3b"
     embed_model: str = "llama3.2:3b"
     # paths
-    pdf_dir: str = "pdfs"
-    chroma_dir: str = "chroma_db"
+    pdf_dir: str = "./hw_1/pdfs"
+    chroma_dir: str = "./hw_1/chroma_db"
     collection_name: str = "se_docs"
     # misc
     experiment_name: str = "baseline"
@@ -88,7 +87,6 @@ def build_vectorstore(chunks: list, cfg: RAGConfig) -> Chroma:
         collection_name=cfg.collection_name,
         persist_directory=cfg.chroma_dir,
     )
-    vectorstore.persist()
     print(f"Vector store saved → {cfg.chroma_dir}/")
     return vectorstore
 
@@ -122,7 +120,7 @@ Answer:"""
 def build_rag_chain(vectorstore: Chroma, cfg: RAGConfig):
     """Return a LangChain LCEL chain: retriever → prompt → LLM → parser."""
     retriever = vectorstore.as_retriever(search_kwargs={"k": cfg.k})
-    llm       = Ollama(model=cfg.llm_model, temperature=0)
+    llm       = OllamaLLM(model=cfg.llm_model, temperature=0)
     prompt    = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
 
     def format_docs(docs):
@@ -155,7 +153,7 @@ def run_manual_tests(chain, retriever, qa_pairs: list[dict], n: int = 5) -> list
         print(f"\n{'='*60}")
         print(f"[{item['difficulty'].upper()}] {q}")
         answer  = chain.invoke(q)
-        sources = retriever.get_relevant_documents(q)
+        sources = retriever.invoke(q)
         src_names = list({d.metadata.get("source_file", "?") for d in sources})
         print(f"Answer : {answer}")
         print(f"Sources: {src_names}")
@@ -175,23 +173,20 @@ if __name__ == "__main__":
         experiment_name="baseline",
     )
 
-    # ── Build (comment out after first run) ──
+    # ── Build ──
     chunks = load_and_split(cfg)
     vs     = build_vectorstore(chunks, cfg)
-
-    # ── Load existing store ──
-    # vs = load_vectorstore(cfg)
 
     chain, retriever = build_rag_chain(vs, cfg)
 
     # Load evaluation dataset
-    with open("eval_dataset.json") as f:
+    with open("./hw_1/eval_dataset.json") as f:
         qa_pairs = json.load(f)
 
     # Manually test the first 5 questions
     results = run_manual_tests(chain, retriever, qa_pairs, n=5)
 
     # Persist manual-test results
-    with open("manual_test_results.json", "w") as f:
+    with open("./hw_1/manual_test_results.json", "w") as f:
         json.dump(results, f, indent=2)
     print("\n✔ Results saved to manual_test_results.json")

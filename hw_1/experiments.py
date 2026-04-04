@@ -35,8 +35,8 @@ def build_experiment_configs() -> List[RAGConfig]:
             chunk_size=cs,
             chunk_overlap=ov,
             k=k,
-            chroma_dir=f"chroma_exp_{i}",          # separate store per experiment
-            collection_name=f"se_exp_{i}",
+            chroma_dir=f"./hw_1/chroma_exp_{i}",
+            collection_name=f"se-exp-{i}",
             experiment_name=f"exp{i:02d}_cs{cs}_ov{ov}_k{k}",
         ))
     return configs
@@ -115,7 +115,7 @@ def run_all_experiments():
 # Failure-Case Analysis (Part 2 deliverable)
 # ──────────────────────────────────────────────
 
-def analyze_failures(results_file: str = "manual_test_results.json"):
+def analyze_failures(results_file: str = "./hw_1/manual_test_results.json"):
     """Print structured failure analysis for the report."""
     with open(results_file) as f:
         results = json.load(f)
