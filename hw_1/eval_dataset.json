@@ -1,102 +1,122 @@
 [
   {
     "id": "E01", "difficulty": "easy",
+    "source": "test-driven-development-with-mutation-testing.pdf",
     "question": "What are the main steps in the Test-Driven Development (TDD) cycle?",
     "expected": "The TDD cycle involves: 1) Writing a failing test for a new feature, 2) Running the test to confirm it fails, 3) Implementing the minimal code to make the test pass, and 4) Refactoring the code for readability and maintainability."
   },
   {
     "id": "E02", "difficulty": "easy",
+    "source": "A_Survey_on_Unit_Testing_Practices_and_Problems.pdf",
     "question": "Define 'Unit Testing' and its primary purpose.",
     "expected": "Unit testing is the practice where developers write test cases for the smallest components of software, such as methods or classes, to ensure they work correctly in isolation."
   },
   {
     "id": "E03", "difficulty": "easy",
+    "source": "software-testing-introduction.pdf",
     "question": "What is the difference between Verification and Validation in software testing?",
     "expected": "Validation means building the right system (meeting user expectations), while Verification means building the system right (matching implementation to specifications). Boehm summarizes this as 'Are we building the right product?' vs 'Are we building the product right?'"
   },
   {
     "id": "E04", "difficulty": "easy",
+    "source": "test-driven-development-with-mutation-testing.pdf",
     "question": "What is the primary goal of Mutation Testing?",
     "expected": "Mutation testing aims to evaluate the quality or adequacy of a test suite by introducing small structural changes (mutants) to the code to see if the existing tests can detect them."
   },
   {
     "id": "E05", "difficulty": "easy",
-    "question": "How many professional developers participated in the survey on developer attitudes toward testing, and how many questions did it include?",
-    "expected": "The survey received 284 responses from professional software developers and consisted of 21 questions aimed at assessing their current engagement with testing and identifying factors influencing their inclination toward testing."
+    "source": "A_Survey_on_Unit_Testing_Practices_and_Problems.pdf",
+    "question": "What did the unit testing survey conclude about the role of automation in unit testing?",
+    "expected": "The survey confirmed that unit testing is an important factor in software development and found that there is both potential and need for further research on automation of unit testing, particularly in the area of unit test maintenance."
   },
   {
     "id": "E06", "difficulty": "easy",
-    "question": "How many developers participated in the unit testing survey, and across how many countries was it conducted?",
-    "expected": "The unit testing survey was conducted amongst 225 software developers across 29 countries using a global online marketing research platform."
+    "source": "A_Survey_on_What_Developers_Think_About_Testing.pdf",
+    "question": "What two goals did the developer testing survey aim to achieve?",
+    "expected": "The survey aimed to: 1) assess developers' current engagement with testing, and 2) identify factors influencing their inclination toward testing — specifically whether developers are inhibited by their environment or would genuinely prefer to test less."
   },
   {
     "id": "E07", "difficulty": "easy",
-    "question": "What is Integration Testing and when does it occur in the development process?",
-    "expected": "Integration Testing verifies that separately developed components or modules work correctly together when combined. It occurs after unit testing and before system testing, focusing on the interfaces and interactions between integrated units."
+    "source": "web-application-testing.pdf",
+    "question": "Why is web application testing considered important according to the literature review?",
+    "expected": "Web applications play an important role in promoting brands and enabling better communication with customers. Testing them is vital to ensure and maintain the quality of these systems, which are produced by a large part of companies and organizations today."
   },
   {
     "id": "E08", "difficulty": "easy",
-    "question": "What is the main characteristic that makes web applications different from traditional software from a testing perspective?",
-    "expected": "Web applications are distributed, multi-tier systems that combine server-side logic, client-side scripting, and dynamic content. This makes them harder to test due to their stateful navigation flows, browser dependency, asynchronous behavior, and constantly evolving frameworks and environments."
+    "source": "software-testing-introduction.pdf",
+    "question": "What is the main challenge in developing a good software quality process?",
+    "expected": "Developing and enacting an effective quality process requires integrating many quality-related activities with product characteristics, process organization, available resources and skills, and budget constraints. Quality engineers must be involved from the very early phases through maintenance and post-mortem analysis."
   },
   {
     "id": "M01", "difficulty": "medium",
+    "source": "test-driven-development-with-mutation-testing.pdf",
     "question": "Explain the concept of a 'Killed Mutant' in mutation testing.",
     "expected": "A mutant is considered 'killed' or detected when at least one test case produces a different result on the mutated code compared to the original code. If no test detects the change, the mutant 'survives', indicating a weakness in the test suite."
   },
   {
     "id": "M02", "difficulty": "medium",
+    "source": "web-application-testing.pdf",
     "question": "What are the three main problems associated with Web Application testing identified in research?",
     "expected": "The three main problems are: 1) Fragility (test cases breaking due to locator or UI changes), 2) Strong Coupling/Low Cohesion (tests being too tightly bound to implementation details), and 3) Incompleteness (difficulty in testing all possible paths, states, and inputs)."
   },
   {
     "id": "M03", "difficulty": "medium",
+    "source": "software-testing-introduction.pdf",
     "question": "Describe 'Scaffolding' in software testing and name its three components.",
     "expected": "Scaffolding is a structure that substitutes missing parts of a system to enable isolated testing of a component. It includes: 1) Drivers (set up the execution environment and call the component under test), 2) Stubs (simulate missing or dependent components), and 3) Oracles (evaluate whether the output is correct)."
   },
   {
     "id": "M04", "difficulty": "medium",
+    "source": "A_Survey_on_Unit_Testing_Practices_and_Problems.pdf",
     "question": "How does 'Confirmation Bias' affect developers during unit testing?",
     "expected": "Confirmation bias leads developers to design tests that confirm the software works as they expect rather than trying to find failures. This results in weaker test suites because developers seek evidence to verify their implementation instead of actively trying to falsify it."
   },
   {
     "id": "M05", "difficulty": "medium",
+    "source": "A_Survey_on_What_Developers_Think_About_Testing.pdf",
     "question": "According to the survey on developer attitudes, what are the main reasons that positively motivate developers to write more tests?",
-    "expected": "Positive motivations include the pursuit of software quality, personal satisfaction from writing good tests, and a sense of professional pride. Developers who are motivated tend to view testing as a craft rather than a chore."
+    "expected": "Positive motivations include the general pursuit of software quality and personal satisfaction. The survey found that motivation to write tests is not purely utilitarian — developers also find personal fulfillment in producing high-quality, well-tested software."
   },
   {
     "id": "M06", "difficulty": "medium",
+    "source": "A_Survey_on_What_Developers_Think_About_Testing.pdf",
     "question": "According to the survey on developer attitudes, what factors negatively impact developers' motivation to test, and what solution emerged from responses?",
-    "expected": "Negative factors include perceiving testing as mundane, tendency to prioritize other tasks, and lack of recognition. The survey found that providing better recognition for developers' testing efforts is a key approach to mitigate these negative factors."
+    "expected": "Negative factors include perceiving testing as mundane and a tendency to prioritize other tasks. The survey found that providing better recognition for developers' testing efforts is a key approach to mitigate these negative factors."
   },
   {
     "id": "M07", "difficulty": "medium",
-    "question": "What were the key quantitative results of the TDD+M experiment compared to standard TDD?",
-    "expected": "In the cross-experiment, TDD+M tests achieved 53.3% statement coverage on TDD code versus 33.5% for TDD tests on their own code, and 64.9% mutation coverage versus 37.5%. TDD+M tests also found more post-release defects in TDD code than TDD tests found in TDD+M code."
+    "source": "test-driven-development-with-mutation-testing.pdf",
+    "question": "What does the cross-experiment design in the TDD+M study reveal, and what did the coverage results show?",
+    "expected": "The cross-experiment measured each group's tests against the other group's code, isolating test quality from code quality. TDD+M tests achieved substantially higher statement coverage (53.3% vs 33.5%) and mutation coverage (64.9% vs 37.5%) on TDD code, showing that TDD+M produces stronger, more generalized tests."
   },
   {
     "id": "M08", "difficulty": "medium",
+    "source": "software-testing-introduction.pdf",
     "question": "What is the difference between Functional Testing and Model-Based Testing?",
-    "expected": "Functional testing validates the system against its specified requirements by treating it as a black box — inputs and outputs are tested without knowledge of internal structure. Model-based testing derives test cases from a formal model (e.g., finite state machines) of the system's expected behavior, enabling more systematic and automated test generation."
+    "expected": "Functional testing validates the system against its specified requirements by treating it as a black box — inputs and outputs are tested without knowledge of internal structure. Model-based testing derives test cases from a formal model of the system's expected behavior, enabling more systematic and automated test generation."
   },
   {
     "id": "H01", "difficulty": "hard",
-    "question": "Explain the TDD+M hybrid approach and its theoretical advantage over standard TDD.",
-    "expected": "TDD+M inserts a mutation testing step between the passing tests and the refactoring phase of TDD. It objectively verifies test quality by requiring tests to 'kill' mutants before moving on. This reduces confirmation bias more effectively than standard TDD by forcing developers to write stronger, more rigorous tests rather than relying on their own assumptions."
+    "source": "test-driven-development-with-mutation-testing.pdf",
+    "question": "Explain the TDD+M hybrid approach and its theoretical advantage over standard TDD in reducing confirmation bias.",
+    "expected": "TDD+M inserts a mutation testing step between the passing tests and the refactoring phase of TDD. It objectively verifies test quality by requiring tests to 'kill' mutants before moving on. This reduces confirmation bias more effectively than standard TDD by forcing developers to write stronger, more rigorous tests rather than relying on their own assumptions about correctness."
   },
   {
     "id": "H02", "difficulty": "hard",
+    "source": "test-driven-development-with-mutation-testing.pdf",
     "question": "Analyze why identifying 'Equivalent Mutants' is a significant challenge in mutation testing.",
     "expected": "Equivalent mutants are syntactically different from the original code but semantically identical — no test can ever kill them because they produce the same behavior. Identifying them is an undecidable problem in computer science, meaning there is no general algorithm to determine equivalence. This often requires manual human analysis, making mutation testing expensive at scale."
   },
   {
     "id": "H03", "difficulty": "hard",
+    "source": "web-application-testing.pdf",
     "question": "Compare the DOM model and the Navigation model as used in web application testing research.",
     "expected": "The DOM model represents the structural elements of a web page and is commonly used for JavaScript unit testing and UI element locating. The Navigation model (such as Finite-State Machines) represents the application's flow — pages as states and user interactions as transitions — enabling broader path coverage and more systematic exploration of user journeys."
   },
   {
     "id": "H04", "difficulty": "hard",
+    "source": "A_Survey_on_What_Developers_Think_About_Testing.pdf",
     "question": "How does the survey on developer attitudes toward testing challenge the prevailing belief that 'developers simply do not like writing tests'?",
-    "expected": "The survey reveals a more nuanced picture: developers are not intrinsically opposed to testing, but are inhibited by environmental factors like lack of recognition and perception of testing as mundane. Many would actually test more if conditions improved. This challenges the assumption that low testing engagement is a preference, suggesting it is instead a structural and motivational problem that can be addressed through better tooling, culture, and recognition."
+    "expected": "The survey reveals a more nuanced picture: developers are not intrinsically opposed to testing, but are inhibited by environmental and structural factors such as lack of recognition and the perception of testing as mundane. Many would actually test more if conditions improved. This challenges the assumption that low testing engagement is a preference, suggesting it is instead a motivational problem addressable through better culture and recognition."
   }
 ]

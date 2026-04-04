@@ -124,8 +124,8 @@ def run_comparison():
         chunk_size=1000,
         chunk_overlap=200,
         k=4,
-        chroma_dir="chroma_exp_4",          # <- set to your best experiment dir
-        collection_name="se_exp_4",
+        chroma_dir="./hw_1/chroma_exp_4",          # <- set to your best experiment dir
+        collection_name="./hw_1/se_exp_4",
         experiment_name="gemini_comparison",
     )
 
