@@ -21,14 +21,14 @@ class RAGConfig:
     chunk_size: int = 1000
     chunk_overlap: int = 200
     # retrieval
-    k: int = 5
+    k: int = 4
     # models
     llm_model: str = "llama3.2:3b"
     embed_model: str = "llama3.2:3b"
     # paths
     pdf_dir: str = "./hw_1/pdfs"
     chroma_dir: str = "./hw_1/chroma_db"
-    collection_name: str = "se_docs"
+    collection_name: str = "rag_hw1"
     # misc
     experiment_name: str = "baseline"
 

@@ -15,6 +15,10 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/
-.pytest_cache/
-.ruff_cache/
-.mypy_cache/
+hw_1/chroma_db/
+hw_1/chroma_exp_*/
+hw_1/pdfs/
+hw_1/__pycache__/
+experiment_results.csv
+hw_1/manual_test_results.json
+*.pyc
