@@ -88,12 +88,6 @@ python hw_1/experiments.py
 ```
 Runs 10 experiments over a grid of chunk sizes, overlaps, and k values. Saves `experiment_results.csv` and prints the optimal configuration.
 
-### Gemini Comparison
-```bash
-python hw_1/gemini_comparison.py
-```
-Requires `GOOGLE_API_KEY`. Compares Gemini and Ollama responses on the same questions.
-
 ---
 
 ## Evaluation Metrics
