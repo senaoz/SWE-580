@@ -92,12 +92,12 @@ Runs 10 experiments over a grid of chunk sizes, overlaps, and k values. Saves `e
 
 ## Evaluation Metrics
 
-| Metric | What it measures | Method |
-|--------|-----------------|--------|
-| **Correctness** | Answer matches the reference answer | LLM-as-judge (0–1) |
-| **Relevance** | Retrieved context covers the question | LLM-as-judge (0–1) |
-| **Faithfulness** | Answer is grounded in context (anti-hallucination) | LLM-as-judge (0–1) |
-| **Conciseness** | Answer is appropriately brief | LLM-as-judge (0–1) |
+| Metric | What it measures |
+|--------|-----------------|
+| **Correctness** | Answer matches the reference answer |
+| **Relevance** | Retrieved context covers the question |
+| **Faithfulness** | Answer is grounded in context (anti-hallucination) |
+| **Conciseness** | Answer is appropriately brief |
 
 The judge model is `llama3.2:3b` at `temperature=0` for deterministic scoring.
 
