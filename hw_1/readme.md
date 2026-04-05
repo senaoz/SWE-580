@@ -424,7 +424,7 @@ exp10_cs1000_ov200_k2        1000            200  2        0.390      0.440     
 
 ✔ Saved → experiment_results.csv
 
-🏆 OPTIMAL CONFIG: exp06_cs500_ov200_k6
+OPTIMAL CONFIG: exp06_cs500_ov200_k6
    chunk_size=500  overlap=200  k=6
    Correctness  = 0.5100
    Relevance    = 0.5150
