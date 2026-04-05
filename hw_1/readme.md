@@ -1,4 +1,4 @@
-# HW1 — RAG System for Software Engineering Papers
+# HW1 — RAG Q&A System
 
 > LangChain · Ollama (llama3.2:3b) · ChromaDB · LangSmith
 
@@ -10,11 +10,10 @@ Covers Part 1 (Core RAG), Part 2 (LangSmith Evaluation), Part 3 (Experiments)
 
 ```
 hw_1/
-├── pdfs/                          # 5 software testing PDFs (not tracked in git)
+├── pdfs/                        # 5 software testing PDFs (not tracked in git)
 ├── rag_pipeline.py              # Part 1 – ingestion, chunking, RAG chain
 ├── langsmith_evaluation.py      # Part 2 – LangSmith tracing + 4 custom evaluators
 ├── experiments.py               # Part 3 – 10 config experiments + analysis
-├── gemini_comparison.py         # Gemini vs Ollama comparison
 ├── eval_dataset.json              # 20 Q&A pairs (8 easy / 8 medium / 4 hard)
 ├── manual_test_results.json       # auto-generated after Part 1
 ├── experiment_results.csv         # auto-generated after Part 3
@@ -126,14 +125,12 @@ The judge model is `llama3.2:3b` at `temperature=0` for deterministic scoring.
 
 Screenshots from the LangSmith dashboard
 
-### Dataset view
-
-### Run traces
-
-### Experiment comparison
-
-### Evaluator scores
-
+<img width="1800" height="1042" alt="Screenshot 2026-04-04 at 23 12 47" src="https://github.com/user-attachments/assets/b08485b8-0b0c-4321-9c2c-6e4a8403558b" />
+<img width="1800" height="1042" alt="Screenshot 2026-04-04 at 23 10 29" src="https://github.com/user-attachments/assets/5c0bfa41-e77b-40f5-ba9b-1f2c5fbfe6f5" />
+<img width="1800" height="1042" alt="Screenshot 2026-04-04 at 23 10 08" src="https://github.com/user-attachments/assets/35e588a0-d46d-4e86-b717-472448e89e6f" />
+<img width="1800" height="1042" alt="Screenshot 2026-04-04 at 23 06 57" src="https://github.com/user-attachments/assets/3bcff8b2-3168-40c2-9430-540908395b6f" />
+<img width="1800" height="1042" alt="Screenshot 2026-04-04 at 23 04 38" src="https://github.com/user-attachments/assets/61700509-910a-4d9f-a80b-8ec5cdd69388" />
+<img width="1800" height="1042" alt="Screenshot 2026-04-04 at 23 03 41" src="https://github.com/user-attachments/assets/d3a1434c-1326-4f9a-9446-00678623d1be" />
 
 ## Notebook Outputs
 
